@@ -26,7 +26,7 @@ function SignUp() {
             type='password'
             placeholder='Пароль'
           />
-          <button className={styles.signup_button}>Зарегистрироваться</button>
+          <button className={styles.signup_button}>Зарегистрироваться!</button>
         </form>
       </div>
     </div>
