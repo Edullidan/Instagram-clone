@@ -1,37 +1,16 @@
 import React, { useState } from "react";
 import styles from "./Sign.module.css";
 import Link from "next/link";
-import { getDB } from "./db/getDB";
+
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      console.error("Введите email и пароль");
-      return;
-    }
-
-    try {
-      const db = await getDB();
-      const response = await fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        console.log("Вход выполнен успешно");
-      } else {
-        console.error("Ошибка аутентификации");
-      }
-    } catch (error) {
-      console.error("Ошибка при запросе к базе данных:", error);
-    }
+    console.log("Email:", email);
+    console.log("Password:", password);
   };
 
   return (
