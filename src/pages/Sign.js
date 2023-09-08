@@ -1,10 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Sign.module.css";
 import Link from "next/link";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/posts")
+      .then((response) => response.json())
+      .then((data) => setPosts(data))
+      .catch((error) => console.error("Ошибка при получении сообщений", error));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,6 +58,16 @@ function SignIn() {
           </button>
         </Link>
       </div>
+
+      {/* Пример отображения полученных сообщений из базы данных */}
+      <ul>
+        {posts.map((post) => (
+          <li key={post._id}>
+            <h2>{post.title}</h2>
+            <p>{post.description}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
