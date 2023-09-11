@@ -10,7 +10,13 @@ function SignIn() {
   useEffect(() => {
     fetch("http://localhost:3000/api/posts")
       .then((response) => response.json())
-      .then((data) => setPosts(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setPosts(data);
+        } else {
+          console.error("API не вернул массив данных:", data);
+        }
+      })
       .catch((error) => console.error("Ошибка при получении сообщений", error));
   }, []);
 
@@ -60,12 +66,7 @@ function SignIn() {
       </div>
 
       <ul>
-        {posts.map((post) => (
-          <li key={post._id}>
-            <h2>{post.title}</h2>
-            <p>{post.description}</p>
-          </li>
-        ))}
+        {Array.isArray(posts) && posts.map((post) => <li key={post._id}></li>)}
       </ul>
     </div>
   );
