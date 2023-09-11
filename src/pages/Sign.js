@@ -59,7 +59,6 @@ function SignIn() {
         </Link>
       </div>
 
-      {/* Пример отображения полученных сообщений из базы данных */}
       <ul>
         {posts.map((post) => (
           <li key={post._id}>
