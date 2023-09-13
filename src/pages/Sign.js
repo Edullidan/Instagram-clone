@@ -1,30 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Sign.module.css";
 import Link from "next/link";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/api/posts")
-      .then((response) => response.json())
-      .then((data) => {
-        if (Array.isArray(data)) {
-          setPosts(data);
-        } else {
-          console.error("API не вернул массив данных:", data);
-        }
-      })
-      .catch((error) => console.error("Ошибка при получении сообщений", error));
-  }, []);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      const response = await fetch("http://localhost:3000/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: email, password }),
+      });
+
+      if (response.status === 200) {
+        console.log("Authentication successful");
+      } else {
+        console.error("Authentication error");
+      }
+    } catch (error) {
+      console.error("Error sending authentication request", error);
+    }
   };
 
   return (
@@ -38,18 +39,18 @@ function SignIn() {
         <input
           className={styles.email}
           type='email'
-          placeholder='Телефон, имя пользователя или эл. адрес'
+          placeholder='Phone, username, or email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className={styles.password}
           type='password'
-          placeholder='Пароль'
+          placeholder='Password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input className={styles.login} type='submit' value='Вход' />
+        <input className={styles.login} type='submit' value='Sign In' />
       </form>
       <img
         className={styles.logo}
@@ -57,17 +58,13 @@ function SignIn() {
         alt='Logo'
       />
       <div className={styles.create_account}>
-        <p>У вас еще нет аккаунта?</p>
+        <p>Don't have an account?</p>
         <Link href={"/signup"}>
           <button className={styles.create_account_button}>
-            Создать учетную запись
+            Create an account
           </button>
         </Link>
       </div>
-
-      <ul>
-        {Array.isArray(posts) && posts.map((post) => <li key={post._id}></li>)}
-      </ul>
     </div>
   );
 }
