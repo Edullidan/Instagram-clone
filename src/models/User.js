@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
-const { Schema } = mongoose;
-
-const userSchema = new Schema(
+const UserSchema = new mongoose.Schema(
   {
-    username: {
+    name: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    email: {
       type: String,
       required: true,
       unique: true,
@@ -18,28 +20,4 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
-userSchema.pre("save", async function (next) {
-  try {
-    if (!this.isModified("password")) {
-      return next();
-    }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(this.password, salt);
-    this.password = hashedPassword;
-    return next();
-  } catch (error) {
-    return next(error);
-  }
-});
-
-userSchema.methods.isValidPassword = async function (password) {
-  try {
-    return await bcrypt.compare(password, this.password);
-  } catch (error) {
-    throw new Error(error);
-  }
-};
-
-const User = mongoose.models.User || mongoose.model("User", userSchema);
-
-export default User;
+export default mongoose.models.User || mongoose.model("User", UserSchema);
