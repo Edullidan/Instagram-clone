@@ -5,6 +5,6 @@ const nextConfig = {
 
 module.exports = {
   env: {
-    MONGODB_URI: "your-mongodb-uri-here",
+    MONGODB_URI: process.env.MONGODB_URI,
   },
 };

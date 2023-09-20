@@ -1,31 +1,19 @@
-import connect from "@/db";
-import User from "@/models/User";
+import { connectToDb } from "@/db";
 
-export default async function handler(nextRequest, nextResponse) {
-  if (nextRequest.method === "POST") {
+export default async (req, res) => {
+  if (req.method === "POST")
     try {
-      await connect();
+      const { email, password } = req.body;
+      const db = await connectToDb();
+      console.log("adafa");
 
-      const { username, password } = nextRequest.body;
-
-      const user = await User.findOne({ username });
-
-      if (!user) {
-        return nextResponse.status(401).json({ error: "User not found" });
-      }
-
-      const isValidPassword = await user.isValidPassword(password);
-
-      if (!isValidPassword) {
-        return nextResponse.status(401).json({ error: "Incorrect password" });
-      }
-
-      nextResponse.status(200).json({ message: "Authentication successful" });
-    } catch (error) {
-      console.error("Error during authentication", error);
-      nextResponse.status(500).json({ error: "Error during authentication" });
+      const collection = db.collection("instagram_Base");
+      console.log(collection);
+      await collection.insertOne({ email, password });
+      console.log(email);
+      return res.status(200);
+      console.log("connected");
+    } catch {
+      return res.status(500);
     }
-  } else {
-    nextResponse.status(405).json({ error: "Method not supported" });
-  }
-}
+};

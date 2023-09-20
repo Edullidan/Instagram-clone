@@ -1,16 +1,16 @@
-import mongoose from "mongoose";
+const { MongoClient } = require("mongodb");
 
-const connect = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("Mongo connection successful");
-  } catch (error) {
-    console.error("Error in connecting to MongoDB", error);
-    throw new Error("Error in connecting to MongoDB");
-  }
-};
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-export default connect;
+async function connectToDb() {
+  // Connect the client to the server
+  await client.connect();
+  console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  return client.db("instagram_clone");
+}
+
+module.exports = { connectToDb };
