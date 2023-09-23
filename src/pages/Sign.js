@@ -5,21 +5,18 @@ import Link from "next/link";
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Before fetch");
-
     try {
-      const response = await fetch("/api/auth", {
+      const response = await fetch("http://localhost:3000/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-
-      console.log("After fetch");
 
       if (response.status === 200) {
         console.log("Authentication successful");
