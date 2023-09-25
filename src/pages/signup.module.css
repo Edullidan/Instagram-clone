@@ -46,3 +46,12 @@
     margin-top: 10px;
     cursor: pointer;
   }
+
+  .instagram{
+    width: 300px;
+    margin: 25px;
+    margin-left: -360px;
+    margin-top: -660px;
+    color: black;
+ 
+ }

@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import styles from "./Sign.module.css";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -19,12 +21,13 @@ function SignIn() {
       });
 
       if (response.status === 200) {
-        console.log("Authentication successful");
+        console.log("Login successful");
+        router.push("/about");
       } else {
-        console.error("Authentication error");
+        console.error("Login error");
       }
     } catch (error) {
-      console.error("Error sending authentication request", error);
+      console.error("Error sending login request", error);
     }
   };
 
@@ -39,18 +42,18 @@ function SignIn() {
         <input
           className={styles.email}
           type='email'
-          placeholder='Phone, username, or email'
+          placeholder='Phone, username or email'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className={styles.password}
           type='password'
-          placeholder='Password'
+          placeholder='password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input className={styles.login} type='submit' value='Sign In' />
+        <input className={styles.login} type='submit' value='login' />
       </form>
       <img
         className={styles.logo}
@@ -58,7 +61,7 @@ function SignIn() {
         alt='Logo'
       />
       <div className={styles.create_account}>
-        <p>Don't have an account?</p>
+        <p>Don't have an account yet?</p>
         <Link href={"/signup"}>
           <button className={styles.create_account_button}>
             Create an account
