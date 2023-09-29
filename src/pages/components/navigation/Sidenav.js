@@ -1,4 +1,4 @@
-import React from "react";
+import { useRouter } from "next/router";
 import styles from "./Sidenav.module.css";
 
 import {
@@ -13,6 +13,12 @@ import {
 } from "react-icons/fa";
 
 function Sidenav() {
+  const router = useRouter();
+
+  const handleCreateClick = () => {
+    router.push("/create-post");
+  };
+
   return (
     <div className={styles.sidenav}>
       <img
@@ -46,7 +52,7 @@ function Sidenav() {
           <FaRegHeart />
           <span>Notifications</span>
         </button>
-        <button className={styles.sidenav__button}>
+        <button className={styles.sidenav__button} onClick={handleCreateClick}>
           <FaRegPlusSquare />
           <span>Create</span>
         </button>

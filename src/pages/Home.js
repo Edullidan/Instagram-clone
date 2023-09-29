@@ -7,10 +7,10 @@ function Homepage() {
   return (
     <div className={styles.homepage}>
       <div className={styles.homepage__nav}>
-        <Sidenav></Sidenav>
+        <Sidenav />
       </div>
       <div className={styles.homepage__timeline}>
-        <Timeline></Timeline>
+        <Timeline />
       </div>
     </div>
   );

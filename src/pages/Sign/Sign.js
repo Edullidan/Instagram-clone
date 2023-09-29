@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Sign.module.css";
+import styles from "../../styles/Sign.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -22,7 +22,7 @@ function SignIn() {
 
       if (response.status === 200) {
         console.log("Login successful");
-        router.push("/about");
+        router.push("/Home");
       } else {
         console.error("Login error");
       }
