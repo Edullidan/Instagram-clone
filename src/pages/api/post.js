@@ -8,12 +8,12 @@ export default async function handler(req, res) {
       const collection = db.collection("instagram_posts");
       await collection.insertOne({ text, createdAt: new Date() });
       console.log("Data inserted into MongoDB");
-      res.status(200).end(); // Send a successful response
+      res.status(200).end();
     } catch (error) {
       console.error("Error creating post:", error);
-      res.status(500).json({ error: "Failed to create post" }); // Send an error response
+      res.status(500).json({ error: "Failed to create post" });
     }
   } else {
-    res.status(405).end(); // Send a "Method Not Allowed" response for other HTTP methods
+    res.status(405).end();
   }
 }

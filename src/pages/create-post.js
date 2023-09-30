@@ -19,7 +19,7 @@ function CreatePostPage() {
 
       if (response.status === 200) {
         console.log("Post created successfully");
-        router.push("/about"); // Перенаправление на страницу about.js после создания поста
+        router.push("/Home");
       } else {
         console.error("Failed to create post");
       }
