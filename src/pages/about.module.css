@@ -1,13 +1,25 @@
 .homepage {
   display: flex;
-  flex-direction: row;
+  flex-direction: column; /* Изменяем направление на вертикальное */
+  position: relative;
 }
 
-.homepage__navWrapper {
+.create__post {
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -360px;
+}
+
+.homepage__content {
+  flex: 1;
   position: relative;
+
+}
+
+.homepage__nav {
   flex: 0.2;
 }
 
-.homepage__timeline {
-  flex: 0.8;
-}
+
+

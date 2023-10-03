@@ -1,48 +1,86 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import styles from "./create-post.module.css";
 
-function CreatePostPage() {
-  const [postText, setPostText] = useState("");
-  const router = useRouter();
+function Posts() {
+  const [postData, setPostData] = useState({
+    text: "",
+    image: null,
+  });
+  const [posts, setPosts] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setPostData({ ...postData, [name]: value });
+  };
 
+  const handleImageChange = (e) => {
+    const imageFile = e.target.files[0];
+    setPostData({ ...postData, image: imageFile });
+  };
+
+  const handleCreatePost = async () => {
     try {
-      const response = await fetch("/api/post", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ text: postText }),
-      });
+      const formData = new FormData();
+      formData.append("text", postData.text);
+      formData.append("image", postData.image);
+
+      const response = await createPost(formData);
 
       if (response.status === 200) {
-        console.log("Post created successfully");
-        router.push("/Home");
+        setPosts([...posts, postData]);
+        setPostData({ text: "", image: null });
       } else {
-        console.error("Failed to create post");
+        console.error("Error creating post. Status code:", response.status);
       }
     } catch (error) {
-      console.error("Error creating post:", error);
+      console.error("Error creating post:", error.message);
     }
   };
 
+  async function createPost(formData) {
+    const response = await fetch("/api/post", {
+      method: "POST",
+      body: formData,
+    });
+
+    return response;
+  }
+
   return (
-    <div>
-      <h2>Create a New Post</h2>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          rows='4'
-          cols='50'
-          value={postText}
-          onChange={(e) => setPostText(e.target.value)}
-          placeholder='Write your post here...'
+    <div className={styles.container}>
+      <div className={styles.createPostForm}>
+        <input
+          type='text'
+          name='text'
+          placeholder='Enter post text'
+          value={postData.text}
+          onChange={handleInputChange}
         />
-        <button type='submit'>Post</button>
-      </form>
+        <input
+          type='file'
+          name='image'
+          accept='image/*'
+          onChange={handleImageChange}
+        />
+        <button onClick={handleCreatePost}>Create Post</button>
+      </div>
+
+      <div className={styles.timeline__posts}>
+        {posts.map((post, index) => (
+          <div key={index} className={styles.post}>
+            <p>{post.text}</p>
+            {post.image && (
+              <img
+                src={URL.createObjectURL(post.image)}
+                alt='Post'
+                className={styles.postImage}
+              />
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-export default CreatePostPage;
+export default Posts;
