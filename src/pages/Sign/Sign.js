@@ -53,7 +53,7 @@ function SignIn() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <input className={styles.login} type='submit' value='login' />
+        <input className={styles.login} type='submit' value='Login' />
       </form>
       <img
         className={styles.logo}

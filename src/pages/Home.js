@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./about.module.css";
+import styles from "./home.module.css";
 import Sidenav from "./components/navigation/Sidenav";
 import Posts from "./create-post";
-import Column from "./components/timeline/Column";
+
 function Homepage() {
   return (
     <div className={styles.homepage}>
@@ -11,9 +11,6 @@ function Homepage() {
       </div>
       <div className={styles.create__post}>
         <Posts></Posts>
-      </div>
-      <div>
-        <Column></Column>
       </div>
     </div>
   );
