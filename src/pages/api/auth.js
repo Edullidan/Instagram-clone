@@ -1,6 +1,6 @@
 import { connectToDb } from "@/db";
 
-export default async (req, res) => {
+const authHandler = async (req, res) => {
   if (req.method === "POST") {
     try {
       const { name, username, email, password } = req.body; // Извлекаем name, username, email и password из запроса
@@ -20,3 +20,5 @@ export default async (req, res) => {
     return res.status(405).end();
   }
 };
+
+export default authHandler;

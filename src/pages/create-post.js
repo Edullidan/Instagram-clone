@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./create-post.module.css";
+import Image from "next/image";
 
 import { FaRegPlusSquare } from "react-icons/fa";
 import {
@@ -94,11 +95,11 @@ function Posts() {
           <div key={index} className={styles.post}>
             <p>{post.text}</p>
             {post.image && (
-              <img
-                src={URL.createObjectURL(post.image)}
-                alt='Post'
-                className={styles.postImage}
-              />
+               <img
+               src={URL.createObjectURL(post.image)}
+               alt='Post'
+               className={styles.postImage}
+             />
             )}
             <div className={styles.postIcons}>
               <AiOutlineHeart

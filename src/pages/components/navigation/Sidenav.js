@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styles from "./Sidenav.module.css";
+import Image from "next/image";
 
 import {
   FaHome,
@@ -18,7 +19,7 @@ function Sidenav() {
 
   return (
     <div className={styles.sidenav}>
-      <img
+        <img
         className={styles.sidenav_logo}
         src='https://www.pngkey.com/png/full/828-8286178_mackeys-work-needs-no-elaborate-presentation-or-distracting.png'
         alt='Logo'

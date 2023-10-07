@@ -1,6 +1,6 @@
 import { connectToDb } from "@/db";
 
-export default async (req, res) => {
+const loginHandler = async (req, res) => {
   if (req.method === "POST") {
     try {
       const { email, password } = req.body;
@@ -24,3 +24,5 @@ export default async (req, res) => {
     return res.status(405).end();
   }
 };
+
+export default loginHandler;

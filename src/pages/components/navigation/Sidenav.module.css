@@ -17,9 +17,10 @@
 }
 
 .sidenav_logo {
-  width: 120px;
+  width: 130px;
   margin: 25px;
-  margin-left: -10px;
+  margin-left: -5px;
+ 
 }
 
 .sidenav__buttons {
@@ -56,3 +57,5 @@
   position: fixed;
   bottom: 3px;
 }
+
+

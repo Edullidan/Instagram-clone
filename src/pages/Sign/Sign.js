@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../../styles/Sign.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image"; // Импортируйте компонент Image
 
 function SignIn() {
   const [email, setEmail] = useState("");
@@ -33,7 +34,7 @@ function SignIn() {
 
   return (
     <div className={styles.sign_in_container}>
-      <img
+        <img
         className={styles.picture}
         src='https://www.thehoth.com/wp-content/uploads/2020/08/Instagram-768x1088.png'
         alt='picture'
