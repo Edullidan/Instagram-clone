@@ -1,0 +1,39 @@
+.timeline__posts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    margin-top: -400px;
+    margin-left: 150px;
+}
+
+.post {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 50%;
+    border-radius: 50px;
+
+
+}
+
+.post p {
+    margin-bottom: 10px;
+}
+
+.postImage {
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    cursor: pointer;
+
+    margin-right: 200px;
+
+    margin-top: -50px;
+
+}
+
+.postIcons {
+    display: flex;
+
+
+}

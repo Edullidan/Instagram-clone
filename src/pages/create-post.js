@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./create-post.module.css";
-import Image from "next/image";
-
 import { FaRegPlusSquare } from "react-icons/fa";
-import {
-  AiOutlineHeart,
-  AiOutlineMessage,
-  AiOutlineSend,
-} from "react-icons/ai";
-import { RiBookmarkLine } from "react-icons/ri";
+import PostList from "./PostList";
 
 function Posts() {
   const [postData, setPostData] = useState({
@@ -56,7 +49,6 @@ function Posts() {
       console.error("Error creating post:", error.message);
     }
   };
-
   const handleLikePost = (index) => {
     const updatedPosts = [...posts];
     updatedPosts[index].likes++;
@@ -69,19 +61,21 @@ function Posts() {
         {isFormOpen ? (
           <>
             <input
-              type='text'
-              name='text'
-              placeholder='Enter post text'
+              type="text"
+              name="text"
+              placeholder="Enter post text"
               value={postData.text}
               onChange={handleInputChange}
             />
             <input
-              type='file'
-              name='image'
-              accept='image/*'
+              type="file"
+              name="image"
+              accept="image/*"
               onChange={handleImageChange}
             />
-            <button onClick={handleCreatePost}>Create Post</button>
+            <button onClick={handleCreatePost} className={styles.post__button}>
+              Create Post
+            </button>
           </>
         ) : (
           <div onClick={() => setIsFormOpen(true)} className={styles.addIcon}>
@@ -90,29 +84,8 @@ function Posts() {
           </div>
         )}
       </div>
-      <div className={styles.timeline__posts}>
-        {posts.map((post, index) => (
-          <div key={index} className={styles.post}>
-            <p>{post.text}</p>
-            {post.image && (
-               <img
-               src={URL.createObjectURL(post.image)}
-               alt='Post'
-               className={styles.postImage}
-             />
-            )}
-            <div className={styles.postIcons}>
-              <AiOutlineHeart
-                className={styles.icon}
-                onClick={() => handleLikePost(index)}
-              />
-              <AiOutlineMessage className={styles.icon} />
-              <AiOutlineSend className={styles.icon} />
-              <RiBookmarkLine className={styles.icon} />
-            </div>
-            <div className={styles.likesCount}></div>
-          </div>
-        ))}
+      <div >
+        <PostList posts={posts} handleLikePost={handleLikePost} />
       </div>
     </div>
   );

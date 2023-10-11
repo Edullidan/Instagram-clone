@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import styles from "./Sidenav.module.css";
-import Image from "next/image";
+
 
 import {
   FaHome,
@@ -13,6 +13,9 @@ import {
   FaBars,
   FaRegPlusSquare,
 } from "react-icons/fa";
+import Posts from "@/pages/create-post";
+
+
 
 function Sidenav() {
   const router = useRouter();
@@ -45,6 +48,7 @@ function Sidenav() {
           <FaRegEnvelope />
           <span>Messages</span>
         </button>
+             <button className={styles.sidenav__button}> <Posts></Posts></button>
         <button className={styles.sidenav__button}>
           <FaRegHeart />
           <span>Notifications</span>
@@ -55,6 +59,7 @@ function Sidenav() {
           <FaBars />
           <span>More</span>
         </button>
+     
       </div>
     </div>
   );

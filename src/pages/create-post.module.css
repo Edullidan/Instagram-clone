@@ -3,70 +3,83 @@
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  
+  z-index: 3;
+  position: relative;
+  /* Добавьте позиционирование */
 }
 
 .createPostForm {
   text-align: center;
   margin-bottom: 20px;
   width: 100%;
-  
+  z-index: 3;
+  position: sticky;
+  top: 0;
 }
+
 
 .createPostForm input,
 .createPostForm button {
-  width: 100%;
+  display: block;
+  /* Располагаем элементы в столбик */
+  width: 150px;
+  /* Устанавливаем фиксированную ширину по вашему выбору */
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  
   background-color: black;
-}
-
-.createPostForm button {
-  background-color: #007BFF;
   color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  cursor: pointer;
+  font-size: 14px;
+  margin-left: -10px;
 }
 
-.timeline__posts {
+
+
+.post__button {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 500px;
-  border: #ccc;
-  
-  
-}
-.postImage {
-    width: 500px;
-
-    border-radius: 5px;
-    border: 1px solid rgba(128, 128, 128, 0.516);
-}
-
-.addIcon {
-  display: flex;
-  justify-content: flex-end; /* Выравнивание контента вправо */
+  justify-content: flex-end;
   align-items: center;
   color: white;
-  background: 0;
   border: 0;
   padding: 10px 15px;
   border-radius: 15px;
   width: 100%;
-  transition: background-color 0.3s ease;
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.128);
   font-size: 18px;
   font-weight: bolder;
 }
 
+.post__container {
+  /* Стили для контейнера с постами */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  z-index: 3;
+  padding-top: 70px;
+  /* Добавьте отступ сверху, чтобы созданные посты не перекрывали форму */
+}
+
+.addIcon {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+  border: 0;
+  padding: 10px 15px;
+  border-radius: 15px;
+  width: 100%;
+  margin-left: -50px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bolder;
+  position: sticky;
+  top: 70px;
+
+}
+
 .addIcon .icon {
-  margin-right: 10px; /* Добавляем немного отступа между иконкой и текстом */
+  margin-right: 10px;
+
 }

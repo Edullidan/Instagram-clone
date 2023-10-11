@@ -11,16 +11,15 @@
   height: 100vh;
   padding: 20px;
 
- 
+
   border-right: 1px solid white;
-  
+
 }
 
 .sidenav_logo {
-  width: 130px;
+  width: 120px;
   margin: 25px;
-  margin-left: -5px;
- 
+  margin-left: -10px;
 }
 
 .sidenav__buttons {
@@ -47,7 +46,7 @@
   background-color: rgba(255, 255, 255, 0.128);
 }
 
-.sidenav__button > span {
+.sidenav__button>span {
   font-size: 18px;
   font-weight: bolder;
   margin-left: 10px;
@@ -57,5 +56,3 @@
   position: fixed;
   bottom: 3px;
 }
-
-
