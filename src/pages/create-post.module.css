@@ -5,11 +5,22 @@
   min-height: 100vh;
   z-index: 3;
   position: relative;
-  /* Добавьте позиционирование */
+  margin-left: 8px;
+}
+
+.createPostFormInner {
+  margin-right: -50px;
+  top: 0;
+  right: 0;
+
+  /* Используйте right, если кнопка должна оставаться справа */
+  z-index: 0;
+  /* Убедитесь, что z-index позволяет кнопке находиться над другими элементами */
 }
 
 .createPostForm {
   text-align: center;
+  margin-left: -72px;
   margin-bottom: 20px;
   width: 100%;
   z-index: 3;
@@ -18,12 +29,13 @@
 }
 
 
+
 .createPostForm input,
 .createPostForm button {
   display: block;
-  /* Располагаем элементы в столбик */
+
   width: 150px;
-  /* Устанавливаем фиксированную ширину по вашему выбору */
+
   padding: 10px;
   margin: 5px 0;
   border: 1px solid #ccc;
@@ -51,14 +63,14 @@
 }
 
 .post__container {
-  /* Стили для контейнера с постами */
+
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   z-index: 3;
   padding-top: 70px;
-  /* Добавьте отступ сверху, чтобы созданные посты не перекрывали форму */
+
 }
 
 .addIcon {
@@ -70,16 +82,13 @@
   padding: 10px 15px;
   border-radius: 15px;
   width: 100%;
-  margin-left: -50px;
+  margin-top: -10px;
+  margin-left: -53px;
   cursor: pointer;
   font-size: 18px;
   font-weight: bolder;
-  position: sticky;
-  top: 70px;
-
 }
 
 .addIcon .icon {
   margin-right: 10px;
-
 }

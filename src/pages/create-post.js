@@ -57,38 +57,45 @@ function Posts() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.createPostForm}>
-        {isFormOpen ? (
-          <>
-            <input
-              type="text"
-              name="text"
-              placeholder="Enter post text"
-              value={postData.text}
-              onChange={handleInputChange}
-            />
-            <input
-              type="file"
-              name="image"
-              accept="image/*"
-              onChange={handleImageChange}
-            />
-            <button onClick={handleCreatePost} className={styles.post__button}>
-              Create Post
-            </button>
-          </>
-        ) : (
           <div onClick={() => setIsFormOpen(true)} className={styles.addIcon}>
             <FaRegPlusSquare className={styles.icon} />
             <span>Create</span>
+      <div className={styles.createPostForm}>
+        <div className={styles.createPostFormInner}>
           </div>
-        )}
+          {isFormOpen ? (
+            <>
+              <input
+                type="text"
+                name="text"
+                placeholder="Enter post text"
+                value={postData.text}
+                onChange={handleInputChange}
+              />
+              <input
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              <button onClick={handleCreatePost} className={styles.post__button}>
+                Create Post
+              </button>
+            </>
+          ) : null}
+        </div>
       </div>
-      <div >
+      <div className={styles.postListContainer}>
         <PostList posts={posts} handleLikePost={handleLikePost} />
       </div>
     </div>
   );
 }
+
+
+
+
+
+
 
 export default Posts;
