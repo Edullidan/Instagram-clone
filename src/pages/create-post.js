@@ -11,10 +11,7 @@ function Posts() {
   const [posts, setPosts] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setPostData({ ...postData, [name]: value });
-  };
+  
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
@@ -51,27 +48,19 @@ function Posts() {
   };
   const handleLikePost = (index) => {
     const updatedPosts = [...posts];
-    updatedPosts[index].likes++;
+    updatedPosts[index].likes++; 
     setPosts(updatedPosts);
   };
 
   return (
     <div className={styles.container}>
-          <div onClick={() => setIsFormOpen(true)} className={styles.addIcon}>
-            <FaRegPlusSquare className={styles.icon} />
-            <span>Create</span>
-      <div className={styles.createPostForm}>
-        <div className={styles.createPostFormInner}>
-          </div>
+      <div onClick={() => setIsFormOpen(true)} className={styles.addIcon}>
+        <FaRegPlusSquare className={styles.icon} />
+        <span>Create</span>
+        <div className={styles.createPostForm}>
+          <div className={styles.createPostFormInner}></div>
           {isFormOpen ? (
             <>
-              <input
-                type="text"
-                name="text"
-                placeholder="Enter post text"
-                value={postData.text}
-                onChange={handleInputChange}
-              />
               <input
                 type="file"
                 name="image"
@@ -91,11 +80,5 @@ function Posts() {
     </div>
   );
 }
-
-
-
-
-
-
 
 export default Posts;

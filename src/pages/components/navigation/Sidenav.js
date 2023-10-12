@@ -12,11 +12,11 @@ import {
   FaRegHeart,
   FaBars,
   FaRegPlusSquare,
+  
+  
+  
 } from "react-icons/fa";
 import Posts from "@/pages/create-post";
-
-
-
 function Sidenav() {
   const router = useRouter();
 
@@ -51,11 +51,11 @@ function Sidenav() {
             <span>Messages</span>
           </button>
          
-          <button className={styles.sidenav__button}><Posts></Posts></button>
           <button className={styles.sidenav__button}>
             <FaRegHeart />
             <span>Notifications</span>
           </button>
+        
         </div>
         <div className={styles.sidenav__more}>
           <button className={styles.sidenav__button}>

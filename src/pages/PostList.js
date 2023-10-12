@@ -20,7 +20,7 @@ function PostList({ posts, handleLikePost }) {
               className={styles.postImage}
             />
           )}
-          <div className={styles.postIcons}>
+          <div className={styles.iconContainer}>
             <AiOutlineHeart
               className={styles.icon}
               onClick={() => handleLikePost(index)}
@@ -29,11 +29,9 @@ function PostList({ posts, handleLikePost }) {
             <AiOutlineSend className={styles.icon} />
             <RiBookmarkLine className={styles.icon} />
           </div>
-          <div className={styles.likesCount}></div>
         </div>
       ))}
     </div>
   );
 }
-
 export default PostList;

@@ -1,17 +1,23 @@
 .homepage {
-  display: flex;
+  overflow: auto;
   flex-direction: row;
 
 }
 
 .homepage__nav {
-
+  margin-bottom: 50px;
   position: relative;
   flex: 0.2;
 }
 
+.posts {
+  margin-left: 35px;
+  margin-top: -600px;
+}
 
 .homepage__column {
   flex: 0.8;
+  position: relative;
   margin-left: 1200px;
+
 }
