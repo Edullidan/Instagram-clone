@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./home.module.css";
 import Sidenav from "./components/navigation/Sidenav";
 import Column from "./components/timeline/Column";
-import Posts from "./create-post";
+import Posts from "./components/CreatePost/create-post";
 
 
 

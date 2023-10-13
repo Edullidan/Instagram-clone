@@ -16,7 +16,7 @@ import {
   
   
 } from "react-icons/fa";
-import Posts from "@/pages/create-post";
+import Posts from "@/pages/components/CreatePost/create-post";
 function Sidenav() {
   const router = useRouter();
 
