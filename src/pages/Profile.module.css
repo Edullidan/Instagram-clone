@@ -1,0 +1,98 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+}
+
+.profileHeader {
+    text-align: center;
+    border-bottom: 2px solid white;
+
+    margin: 20px 0;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    margin-left: -200px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.username {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 10px 0;
+    margin-top: -100px;
+}
+
+
+.iconsContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    margin-left: -70px;
+    position: relative;
+
+
+
+
+}
+
+.icon {
+    font-size: 24px;
+    margin: 0 10px;
+    color: white;
+    background: 0;
+    border: 0;
+    margin: 5px 0;
+    padding: 10px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.icon:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.128);
+}
+
+
+.profileStats {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.stat {
+    margin: 0 20px;
+    text-align: center;
+}
+
+.statCount {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.statLabel {
+    font-size: 16px;
+}
+
+.bio {
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.Sidenav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    padding: 20px;
+    z-index: 1;
+    border-right: 1px solid #ccc;
+}
