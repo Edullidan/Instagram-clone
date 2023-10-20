@@ -12,13 +12,17 @@ import {
   FaRegHeart,
   FaBars,
   FaRegPlusSquare,
-  
+  FaUser
   
   
 } from "react-icons/fa";
-import Posts from "@/pages/components/CreatePost/create-post";
+
 function Sidenav() {
   const router = useRouter();
+
+  const navigateToProfile = () => {
+    router.push("/Profile"); // Перенаправить пользователя на страницу "Profile"
+  };
 
  
   
@@ -55,7 +59,9 @@ function Sidenav() {
             <FaRegHeart />
             <span>Notifications</span>
           </button>
-        
+          <button className={styles.sidenav__button} onClick={navigateToProfile}>
+            <FaUser />
+            <span>Profile</span></button>
         </div>
         <div className={styles.sidenav__more}>
           <button className={styles.sidenav__button}>

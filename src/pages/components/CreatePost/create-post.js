@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./create-post.module.css";
 import { FaRegPlusSquare } from "react-icons/fa";
-import PostList from "../PostList/PostList";
-
+import { AiOutlineHeart, AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
+import { RiBookmarkLine } from "react-icons/ri";
 
 function Posts() {
   const [postData, setPostData] = useState({
@@ -11,8 +11,6 @@ function Posts() {
   });
   const [posts, setPosts] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
-
-  
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
@@ -47,6 +45,7 @@ function Posts() {
       console.error("Error creating post:", error.message);
     }
   };
+  
   const handleLikePost = (index) => {
     const updatedPosts = [...posts];
     updatedPosts[index].likes++; 
@@ -75,8 +74,30 @@ function Posts() {
           ) : null}
         </div>
       </div>
-      <div className={styles.postListContainer}>
-        <PostList posts={posts} handleLikePost={handleLikePost} />
+      <div className={styles.post__container}>
+        <div className={styles.timeline__posts}>
+          {posts.map((post, index) => (
+            <div key={index} className={styles.post}>
+              <p>{post.text}</p>
+              {post.image && (
+                <img
+                  src={URL.createObjectURL(post.image)}
+                  alt="Post"
+                  className={styles.postImage}
+                />
+              )}
+              <div className={styles.iconContainer}>
+                <AiOutlineHeart
+                  className={styles.icon}
+                  onClick={() => handleLikePost(index)}
+                />
+                <AiOutlineMessage className={styles.icon} />
+                <AiOutlineSend className={styles.icon} />
+                <RiBookmarkLine className={styles.icon} />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

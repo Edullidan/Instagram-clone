@@ -12,12 +12,10 @@
 
 .posts {
   margin-left: 35px;
-  margin-top: -600px;
+  margin-top: -490px;
 }
 
-.homepage__column {
+.homepage_posts {
   flex: 0.8;
-  position: relative;
-  margin-left: 1200px;
-
+  margin-top: -1300px;
 }
