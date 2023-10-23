@@ -8,6 +8,7 @@
 .post {
     width: 550px;
     margin: 30px;
+    margin-top: 20px;
 }
 
 .post__header {
@@ -62,6 +63,7 @@
 
 .timeline__left {
     flex: 0.7;
+    z-index: 2;
 }
 
 .timeline__right {

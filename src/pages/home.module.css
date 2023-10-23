@@ -18,4 +18,8 @@
 .homepage_posts {
   flex: 0.8;
   margin-top: -1300px;
+  display: flex;
+  flex-direction: column;
+  /* Располагаем компоненты вертикально */
+  flex: 0.8;
 }

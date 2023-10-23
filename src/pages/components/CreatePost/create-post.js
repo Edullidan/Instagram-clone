@@ -3,6 +3,7 @@ import styles from "./create-post.module.css";
 import { FaRegPlusSquare } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
 import { RiBookmarkLine } from "react-icons/ri";
+import { Avatar } from "@mui/material"; // Import the Avatar component
 
 function Posts() {
   const [postData, setPostData] = useState({
@@ -44,11 +45,11 @@ function Posts() {
     } catch (error) {
       console.error("Error creating post:", error.message);
     }
-  };
-  
+  }
+
   const handleLikePost = (index) => {
     const updatedPosts = [...posts];
-    updatedPosts[index].likes++; 
+    updatedPosts[index].likes++;
     setPosts(updatedPosts);
   };
 
@@ -78,6 +79,13 @@ function Posts() {
         <div className={styles.timeline__posts}>
           {posts.map((post, index) => (
             <div key={index} className={styles.post}>
+              <div className={styles.postHeader}>
+                <Avatar
+                  alt="User Avatar"
+                 
+                />
+               
+              </div>
               <p>{post.text}</p>
               {post.image && (
                 <img

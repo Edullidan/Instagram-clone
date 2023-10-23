@@ -1,15 +1,13 @@
 .container {
   display: flex;
-  padding-right: 1000px;
 
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
-  z-index: 3;
+  z-index: 1;
+  /* Установите здесь значение 1 или другое низкое значение z-index */
   position: relative;
   margin-left: 9px;
-
-
 }
 
 .createPostFormInner {
