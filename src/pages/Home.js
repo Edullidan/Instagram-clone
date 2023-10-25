@@ -19,9 +19,7 @@ function Homepage() {
           <Posts></Posts>
         </div>
       </div>
-        <div className={styles.homepage_posts}>
-          <PostList></PostList>
-        </div>
+     
       
     </div>
   );

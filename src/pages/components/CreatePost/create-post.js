@@ -3,7 +3,8 @@ import styles from "./create-post.module.css";
 import { FaRegPlusSquare } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
 import { RiBookmarkLine } from "react-icons/ri";
-import { Avatar } from "@mui/material"; // Import the Avatar component
+import { Avatar } from "@mui/material";
+
 
 function Posts() {
   const [postData, setPostData] = useState({
@@ -11,12 +12,13 @@ function Posts() {
     image: null,
   });
   const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]); 
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setPostData({ ...postData, image: imageFile });
-  };
+  }; мож
 
   async function createPost(formData) {
     const response = await fetch("/api/post", {
@@ -53,6 +55,41 @@ function Posts() {
     setPosts(updatedPosts);
   };
 
+  const CommentInput = ({ postId, setComments }) => {
+    const [commentText, setCommentText] = useState("");
+
+    const handleCommentChange = (e) => {
+      setCommentText(e.target.value);
+    };
+
+    const handleAddComment = () => {
+     
+      const newComment = {
+       
+        text: commentText,
+      
+      };
+
+  
+      setComments((prevComments) => [...prevComments, newComment]);
+
+  
+      setCommentText("");
+    };
+
+    return (
+      <div className={styles.comment_container}>
+        <input className={styles.add_comment}
+          type="text"
+          placeholder="Add a comment..."
+          value={commentText}
+          onChange={handleCommentChange}
+        />
+        <button className={styles.comment_create} onClick={handleAddComment}>Submit</button>
+      </div>
+    );
+  };
+
   return (
     <div className={styles.container}>
       <div onClick={() => setIsFormOpen(true)} className={styles.addIcon}>
@@ -80,11 +117,7 @@ function Posts() {
           {posts.map((post, index) => (
             <div key={index} className={styles.post}>
               <div className={styles.postHeader}>
-                <Avatar
-                  alt="User Avatar"
-                 
-                />
-               
+                <Avatar alt="User Avatar" />
               </div>
               <p>{post.text}</p>
               {post.image && (
@@ -103,6 +136,16 @@ function Posts() {
                 <AiOutlineSend className={styles.icon} />
                 <RiBookmarkLine className={styles.icon} />
               </div>
+              
+              <CommentInput postId={index} setComments={setComments} />
+          
+              {comments
+                .filter((comment) => comment.postId === index)
+                .map((comment) => (
+                  <div key={comment.id} className={styles.comment}>
+                    {comment.text}
+                  </div>
+                ))}
             </div>
           ))}
         </div>
