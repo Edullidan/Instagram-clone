@@ -8,9 +8,15 @@ const loginHandler = async (req, res) => {
       const collection = db.collection("instagram_Users");
 
       const user = await collection.findOne({ email, password });
-
+      const userData = {
+        id: user.id, 
+        name: user.name,
+        email: user.email,
+      };
+      
+      
       if (user) {
-        return res.status(200).json({ message: "Authorization successful" });
+        return res.status(200).json((userData),{ message: "Authorization successful" });
       } else {
         return res
           .status(401)
@@ -26,3 +32,4 @@ const loginHandler = async (req, res) => {
 };
 
 export default loginHandler;
+

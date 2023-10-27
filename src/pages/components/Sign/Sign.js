@@ -3,7 +3,6 @@ import styles from "./Sign.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,13 +21,29 @@ function SignIn() {
       });
 
       if (response.status === 200) {
-        console.log("Login successful");
-        router.push("/Home");
+        const userData = await response.json();
+        const userId = userData.id; // Получаем ID пользователя при успешной авторизации
+
+        // Создаем пост с указанием ID пользователя
+        const postResponse = await fetch("/api/post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: "Новый пост", userId }), 
+        });
+
+        if (postResponse.status === 200) {
+          console.log("Пост успешно создан и связан с пользователем");
+          router.push("/Home");
+        } else {
+          console.error("Ошибка при создании поста");
+        }
       } else {
-        console.error("Login error");
+        console.error("Ошибка авторизации");
       }
     } catch (error) {
-      console.error("Error sending login request", error);
+      console.error("Ошибка при отправке запроса на авторизацию", error);
     }
   };
 

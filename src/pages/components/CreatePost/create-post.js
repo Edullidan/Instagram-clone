@@ -4,6 +4,8 @@ import { FaRegPlusSquare } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineMessage, AiOutlineSend } from "react-icons/ai";
 import { RiBookmarkLine } from "react-icons/ri";
 import { Avatar } from "@mui/material";
+import createComment from "@/pages/Comment/createComment";
+
 
 
 function Posts() {
@@ -18,7 +20,7 @@ function Posts() {
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setPostData({ ...postData, image: imageFile });
-  }; мож
+  };
 
   async function createPost(formData) {
     const response = await fetch("/api/post", {
@@ -62,20 +64,25 @@ function Posts() {
       setCommentText(e.target.value);
     };
 
-    const handleAddComment = () => {
-     
-      const newComment = {
-       
-        text: commentText,
-      
-      };
-
-  
-      setComments((prevComments) => [...prevComments, newComment]);
-
-  
-      setCommentText("");
-    };
+    const handleAddComment = async () => {
+      try {
+        const newComment = {
+          text: commentText,
+          postId: postId, 
+        };
+    
+        const response = await createComment(newComment);
+    
+        if (response.status === 200) {
+          setComments((prevComments) => [...prevComments, newComment]);
+          setCommentText("");
+        } else {
+          console.error("Error creating comment. Status code:", response.status);
+        }
+      } catch (error) {
+        console.error("Error creating comment:", error.message);
+      }
+    }
 
     return (
       <div className={styles.comment_container}>
@@ -84,7 +91,9 @@ function Posts() {
           placeholder="Add a comment..."
           value={commentText}
           onChange={handleCommentChange}
+          
         />
+       
         <button className={styles.comment_create} onClick={handleAddComment}>Submit</button>
       </div>
     );
@@ -99,6 +108,7 @@ function Posts() {
           <div className={styles.createPostFormInner}></div>
           {isFormOpen ? (
             <>
+      
               <input
                 type="file"
                 name="image"
@@ -138,7 +148,7 @@ function Posts() {
               </div>
               
               <CommentInput postId={index} setComments={setComments} />
-          
+             
               {comments
                 .filter((comment) => comment.postId === index)
                 .map((comment) => (

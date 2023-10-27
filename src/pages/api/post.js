@@ -3,10 +3,10 @@ import { connectToDb } from "@/db";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const { text } = req.body;
+      const { text ,userId} = req.body;
       const db = await connectToDb();
-      const collection = db.collection("instagram_posts");
-      await collection.insertOne({ text, createdAt: new Date() });
+      const collection = db.collection("instagram_Posts");
+      await collection.insertOne({ text, createdAt: new Date(), userId});
       console.log("Data inserted into MongoDB");
       res.status(200).end();
     } catch (error) {
