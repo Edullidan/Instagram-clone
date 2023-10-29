@@ -12,6 +12,7 @@ function Posts() {
   const [postData, setPostData] = useState({
     text: "",
     image: null,
+   
   });
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]); 
@@ -20,7 +21,7 @@ function Posts() {
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setPostData({ ...postData, image: imageFile });
-  };
+  }; 
 
   async function createPost(formData) {
     const response = await fetch("/api/post", {

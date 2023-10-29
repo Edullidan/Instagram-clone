@@ -21,31 +21,18 @@ function SignIn() {
       });
 
       if (response.status === 200) {
+        console.log("Login successful");
         const userData = await response.json();
-        const userId = userData.id; // Получаем ID пользователя при успешной авторизации
-
-        // Создаем пост с указанием ID пользователя
-        const postResponse = await fetch("/api/post", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: "Новый пост", userId }), 
-        });
-
-        if (postResponse.status === 200) {
-          console.log("Пост успешно создан и связан с пользователем");
-          router.push("/Home");
-        } else {
-          console.error("Ошибка при создании поста");
-        }
+      
+        router.push(`/Home?email=${userData.email}`);
       } else {
-        console.error("Ошибка авторизации");
+        console.error("Login error");
       }
     } catch (error) {
-      console.error("Ошибка при отправке запроса на авторизацию", error);
+      console.error("Error sending login request", error);
     }
   };
+
 
   return (
     <div className={styles.sign_in_container}>
