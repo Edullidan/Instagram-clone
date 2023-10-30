@@ -6,22 +6,19 @@ import { RiBookmarkLine } from "react-icons/ri";
 import { Avatar } from "@mui/material";
 import createComment from "@/pages/Comment/createComment";
 
-
-
 function Posts() {
   const [postData, setPostData] = useState({
     text: "",
     image: null,
-   
   });
   const [posts, setPosts] = useState([]);
-  const [comments, setComments] = useState([]); 
+  const [comments, setComments] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setPostData({ ...postData, image: imageFile });
-  }; 
+  };
 
   async function createPost(formData) {
     const response = await fetch("/api/post", {
@@ -41,7 +38,17 @@ function Posts() {
       const response = await createPost(formData);
 
       if (response.status === 200) {
-        setPosts([...posts, postData]);
+        const newPost = { ...postData };
+        newPost.imageURL = URL.createObjectURL(postData.image);
+        setPosts([...posts, newPost]);
+
+        const postsToStore = [...posts, newPost];
+        postsToStore.forEach((post) => {
+          delete post.imageURL;
+        });
+
+        localStorage.setItem("posts", JSON.stringify(postsToStore));
+
         setPostData({ text: "", image: null });
         setIsFormOpen(false);
       } else {
@@ -52,6 +59,27 @@ function Posts() {
     }
   }
 
+  useEffect(() => {
+    const storedPosts = JSON.parse(localStorage.getItem("posts"));
+    if (storedPosts) {
+     
+      const restoredPosts = storedPosts.map((post) => {
+        if (post.image) {
+          const blob = new Blob([null], { type: "image/*" });
+          const imageURL = post.imageURL; 
+          const image = new Image();
+          image.src = imageURL;
+          image.onload = () => {
+            URL.revokeObjectURL(imageURL); 
+          };
+          return { ...post, image: blob, imageURL: null };
+        } else {
+          return post;
+        }
+      });
+      setPosts(restoredPosts);
+    }
+  }, []);
   const handleLikePost = (index) => {
     const updatedPosts = [...posts];
     updatedPosts[index].likes++;
@@ -69,11 +97,11 @@ function Posts() {
       try {
         const newComment = {
           text: commentText,
-          postId: postId, 
+          postId: postId,
         };
-    
+
         const response = await createComment(newComment);
-    
+
         if (response.status === 200) {
           setComments((prevComments) => [...prevComments, newComment]);
           setCommentText("");
@@ -83,22 +111,24 @@ function Posts() {
       } catch (error) {
         console.error("Error creating comment:", error.message);
       }
-    }
+    };
 
     return (
       <div className={styles.comment_container}>
-        <input className={styles.add_comment}
+        <input
+          className={styles.add_comment}
           type="text"
           placeholder="Add a comment..."
           value={commentText}
           onChange={handleCommentChange}
-          
         />
-       
-        <button className={styles.comment_create} onClick={handleAddComment}>Submit</button>
+
+        <button className={styles.comment_create} onClick={handleAddComment}>
+          Submit
+        </button>
       </div>
     );
-  };
+  }
 
   return (
     <div className={styles.container}>
@@ -109,7 +139,6 @@ function Posts() {
           <div className={styles.createPostFormInner}></div>
           {isFormOpen ? (
             <>
-      
               <input
                 type="file"
                 name="image"
@@ -131,7 +160,7 @@ function Posts() {
                 <Avatar alt="User Avatar" />
               </div>
               <p>{post.text}</p>
-              {post.image && (
+              {post.image && typeof post.image === "object" && post.image instanceof Blob && (
                 <img
                   src={URL.createObjectURL(post.image)}
                   alt="Post"
@@ -147,9 +176,9 @@ function Posts() {
                 <AiOutlineSend className={styles.icon} />
                 <RiBookmarkLine className={styles.icon} />
               </div>
-              
+
               <CommentInput postId={index} setComments={setComments} />
-             
+
               {comments
                 .filter((comment) => comment.postId === index)
                 .map((comment) => (
