@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./home.module.css";
+import styles from "../styles/HomePage.module.css";
 import Sidenav from "./components/navigation/Sidenav";
 
 import Posts from "./components/CreatePost/create-post";
-import PostList from "./components/PostList/PostList";
+
 
 
 

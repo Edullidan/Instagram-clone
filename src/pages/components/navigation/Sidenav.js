@@ -21,7 +21,7 @@ function Sidenav() {
   const router = useRouter();
 
   const navigateToProfile = () => {
-    router.push("/Profile"); // Перенаправить пользователя на страницу "Profile"
+    router.push("/Profile"); 
   };
 
  

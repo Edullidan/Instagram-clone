@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar } from "@mui/material";
-import styles from "./Profile.module.css";
+import styles from "../styles/Profile.module.css";
 import Sidenav from "./components/navigation/Sidenav";
 import { FaImages, } from 'react-icons/fa';
 import {BiBookmarkAlt } from "react-icons/bi";

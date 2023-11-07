@@ -1,4 +1,4 @@
-import Link from "next/link";
+
 import { useState } from "react";
 import styles from "../styles/SignUp.module.css";
 
@@ -20,7 +20,7 @@ const SignUp = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, username, email, password }), // Добавляем name и username
+        body: JSON.stringify({ name, username, email, password }), 
       });
 
       if (response.status === 200) {
